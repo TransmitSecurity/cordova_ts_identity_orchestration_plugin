@@ -1,0 +1,32 @@
+{
+  "name": "cordova-plugin-identity-orchestration",
+  "version": "1.0.0",
+  "description": "Transmit Security Identity Orchestration Cordova plugin for iOS and Android",
+  "cordova": {
+    "id": "cordova-plugin-identity-orchestration",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "cordova-ios",
+    "cordova-android",
+    "ios",
+    "android",
+    "ido",
+    "identity-orchestration",
+    "transmitsecurity",
+    "authentication"
+  ],
+  "engines": {
+    "cordovaDependencies": {
+      "1.0.0": {
+        "cordova-ios": ">=8.0.0",
+        "cordova-android": ">=14.0.1"
+      }
+    }
+  },
+  "license": "MIT"
+}

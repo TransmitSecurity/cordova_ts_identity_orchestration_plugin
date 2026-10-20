@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-identity-orchestration"
+        version="1.0.0">
+
+    <name>cordova-plugin-identity-orchestration</name>
+    <description>Transmit Security Identity Orchestration Cordova plugin</description>
+    <license>MIT</license>
+
+    <engines>
+        <engine name="cordova-ios"     version=">=8.0.0"  />
+        <engine name="cordova-android" version=">=12.0.0" />
+    </engines>
+
+    <js-module src="www/ido-plugin/identity-orchestration-api.js" name="tsido">
+        <clobbers target="cordova.tsido" />
+    </js-module>
+
+    <!-- Cordova prepare only copies declared js-module files into platforms/*/www/plugins/. -->
+    <js-module src="www/ido-plugin/lib/logger.js"          name="tsido-logger" />
+    <js-module src="www/ido-plugin/lib/bridge.js"          name="tsido-bridge" />
+    <js-module src="www/ido-plugin/lib/journey-steps.js"   name="tsido-journey-steps" />
+    <js-module src="www/ido-plugin/lib/journey-events.js"  name="tsido-journey-events" />
+
+    <!-- Enables Kotlin in the Cordova app module so TSIdoPlugin.kt compiles. -->
+    <!-- Cordova resets IS_GRADLE_PLUGIN_KOTLIN_ENABLED=false on every prepare; this re-enables it. -->
+    <hook type="after_prepare" src="scripts/enable-android-kotlin.js" />
+    <!-- Keep Gradle wrapper on cordova-android's pinned version (AS may bump it to 9.x and break sync). -->
+    <hook type="after_prepare" src="scripts/pin-android-gradle-wrapper.js" />
+    <!-- cordova-ios always generates empty Podfile/Pods even for SPM-only plugins; strip them. -->
+    <hook type="after_prepare" src="scripts/remove-unused-ios-cocoapods.js" />
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TSIdoPlugin">
+                <param name="android-package" value="com.transmitsecurity.ido.TSIdoPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+
+        <source-file src="src/android/TSIdoPlugin.kt"
+                     target-dir="app/src/main/kotlin/com/transmitsecurity/ido" />
+        <framework src="src/android/cordova-plugin-identity-orchestration.gradle"
+                   custom="true" type="gradleReference" />
+    </platform>
+
+    <platform name="ios" package="swift">
+        <config-file target="config.xml" parent="/*">
+            <feature name="TSIdoPlugin">
+                <param name="ios-package" value="TSIdoPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+    </platform>
+</plugin>

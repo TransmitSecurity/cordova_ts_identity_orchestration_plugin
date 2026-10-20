@@ -1,0 +1,22 @@
+.DS_Store
+
+# Xcode user-specific workspace state
+**/xcuserdata/
+
+# Cordova plugin staging copy (scripts/stage-plugin-copy-excluding-example-app.sh)
+.cordova-plugin-staging/
+
+# Example app generated / local secrets
+example/node_modules/
+example/platforms/
+example/plugins/
+example/package-lock.json
+example/www/js/config.js
+example/resources/android/values/strings.xml
+
+# Local customer-dist output from scripts/build_plugin.sh
+cordova-plugin-identity-orchestration/
+
+# Override the global ignore: this CLAUDE.md is repo-level guidance for
+# Claude Code sessions and is intended to be committed.
+!CLAUDE.md
