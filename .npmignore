@@ -1,0 +1,6 @@
+example/
+platforms/
+plugins/
+node_modules/
+.git/
+.cordova-plugin-staging/

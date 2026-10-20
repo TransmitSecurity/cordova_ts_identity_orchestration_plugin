@@ -1,0 +1,13 @@
+repositories {
+    maven {
+        url 'https://transmit.jfrog.io/artifactory/transmit-security-gradle-release-local/'
+    }
+}
+
+dependencies {
+    implementation 'com.ts.sdk:identityorchestration:1.0.36'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
